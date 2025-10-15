@@ -50,16 +50,18 @@ class MainActivity : AppCompatActivity() {
             // Delete
             val category = categoryList[position]
 
+            val textMessage = " ${category.name}?"
+            val messageText = getString(R.string.dialog_message) + textMessage
             val dialog = AlertDialog.Builder(this)
-                .setTitle("Borrar categoria")
-                .setMessage("¿Está usted seguro de que quiere borrar la categoría: ${category.name}?")
-                .setPositiveButton("Si") { dialog, which ->
+                .setTitle(R.string.dialog_title)
+                .setMessage(messageText)
+                .setPositiveButton(R.string.dialog_positive_button) { dialog, which ->
                     categoryDAO.delete(category.id)
                     loadData()
-                    Snackbar.make(binding.root, "Categoría borrada correctamente", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.dialog_snaker, Snackbar.LENGTH_SHORT).show()
                     //Toast.makeText(this, "Categoría borrada correctamente", Toast.LENGTH_SHORT).show()
                 }
-                .setNegativeButton("No", null)
+                .setNegativeButton(R.string.dialog_negative_button, null)
                 .create()
 
             dialog.show()

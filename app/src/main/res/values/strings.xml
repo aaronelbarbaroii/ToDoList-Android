@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ToDoList-Android</string>
+
+    <string name="hint_name">Category name</string>
+    <string name="button_save">Save</string>
+
+    <string name="dialog_title">Clear category</string>
+    <string name="dialog_message">Are you sure you want to delete the category:</string>
+    <string name="dialog_positive_button">Accept</string>
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_snaker">Category deleted correctly</string>
+
 </resources>

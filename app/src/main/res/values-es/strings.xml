@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDoList-Android</string>
+
+    <string name="hint_name">Nombre de Categoría</string>
+    <string name="button_save">Guardar</string>
+
+    <string name="dialog_title">Borrar Categoría</string>
+    <string name="dialog_message">¿Está seguro de que desea eliminar la categoría:</string>
+    <string name="dialog_positive_button">Aceptar</string>
+    <string name="dialog_negative_button">Cancelar</string>
+    <string name="dialog_snaker">Categoría borrada correctamente</string>
+
+</resources>
