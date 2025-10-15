@@ -15,14 +15,14 @@ class CategoryAdapter (
     val onDeleteListener: (Int) -> Unit
 ) : RecyclerView.Adapter<CategoryViewHolder>() {
 
-    // Cual es la vista para los elementos
+    // ¿Cuál es la vista para los elementos?
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemCategoryBinding.inflate(layoutInflater, parent, false)
         return CategoryViewHolder(binding)
     }
 
-    // Cuales son los datos para el elemento
+    // ¿Cuáles son los datos para el elemento?
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = items[position]
         holder.render(item)

@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist_android.R
+import com.example.todolist_android.activities.CategoryActivity.Companion.EXTRA_CATEGORY_ID
 import com.example.todolist_android.adapters.CategoryAdapter
 import com.example.todolist_android.data.Category
 import com.example.todolist_android.data.CategoryDAO
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             // Edit
             val category = categoryList[position]
             val intent = Intent(this, CategoryActivity::class.java)
-            intent.putExtra("CATEGORY_ID", category.id)
+            intent.putExtra(EXTRA_CATEGORY_ID, category.id)
             startActivity(intent)
         }, { position ->
             // Delete

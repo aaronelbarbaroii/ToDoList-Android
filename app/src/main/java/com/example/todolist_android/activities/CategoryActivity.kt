@@ -11,6 +11,9 @@ import com.example.todolist_android.data.CategoryDAO
 import com.example.todolist_android.databinding.ActivityCategoryBinding
 
 class CategoryActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_CATEGORY_ID = "CATEGORY_ID"
+    }
     lateinit var categoryDAO: CategoryDAO
     lateinit var binding: ActivityCategoryBinding
     lateinit var category: Category
@@ -28,7 +31,7 @@ class CategoryActivity : AppCompatActivity() {
             insets
         }
 
-        val id = intent.getIntExtra("CATEGORY_ID", -1)
+        val id = intent.getIntExtra(EXTRA_CATEGORY_ID, -1)
 
         categoryDAO = CategoryDAO(this)
 
