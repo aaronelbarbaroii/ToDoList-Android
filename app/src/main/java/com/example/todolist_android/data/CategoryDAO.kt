@@ -59,6 +59,7 @@ class CategoryDAO(val context: Context) {
             open()
 
             // Insert the new row, returning the primary key value of the new row
+//            val deletedRows = db.delete(Category.TABLE_NAME, "${Category.COLUMN_ID} = ?", arrayOf("$id")) Otra forma de hacerlo
             val deletedRows = db.delete(Category.TABLE_NAME, "${Category.COLUMN_ID} = $id", null)
             Log.i("DATABASE", "$deletedRows rows deleted in table ${Category.TABLE_NAME}")
         } catch (e: Exception) {
@@ -151,7 +152,6 @@ class CategoryDAO(val context: Context) {
         } finally {
             close()
         }
-
         return items
     }
 }

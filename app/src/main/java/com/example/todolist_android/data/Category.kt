@@ -2,10 +2,9 @@ package com.example.todolist_android.data
 
 data class Category(
     val id: Int,
-    val name: String
+    var name: String
 ) {
     companion object {
-
         const val TABLE_NAME = "Category"
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "nane"
