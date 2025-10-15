@@ -51,11 +51,9 @@ class MainActivity : AppCompatActivity() {
             // Delete
             val category = categoryList[position]
 
-            val textMessage = " ${category.name}?"
-            val messageText = getString(R.string.dialog_message) + textMessage
             val dialog = AlertDialog.Builder(this)
                 .setTitle(R.string.dialog_title)
-                .setMessage(messageText)
+                .setMessage(getString(R.string.dialog_message) + " ${category.name}?")
                 .setPositiveButton(R.string.dialog_positive_button) { dialog, which ->
                     categoryDAO.delete(category.id)
                     loadData()
