@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -41,10 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         adapter = CategoryAdapter(categoryList, { position ->
             // Click
-            val category = categoryList[position]
-            val intent = Intent(this, TaskListActivity::class.java)
-            intent.putExtra("CATEGORY_ID", category.id)
-            startActivity(intent)
+            onPressedItem(position)
         }, { position ->
             // Edit
             onEditItem(position)
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onResume() {
         super.onResume()
         loadData()
@@ -73,6 +71,13 @@ class MainActivity : AppCompatActivity() {
     fun loadData() {
         categoryList = categoryDAO.findAll()
         adapter.updateItems(categoryList)
+    }
+
+    private fun onPressedItem(position: Int) {
+        val category = categoryList[position]
+        val intent = Intent(this, TaskListActivity::class.java)
+        intent.putExtra("CATEGORY_ID", category.id)
+        startActivity(intent)
     }
 
     private fun onEditItem(position: Int) {
@@ -101,5 +106,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
 
 
