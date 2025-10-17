@@ -2,6 +2,7 @@
     <string name="app_name">ToDoList-Android</string>
 
     <string name="hint_name">Category name</string>
+    <string name="hint_task">What to do</string>
     <string name="button_save">Save</string>
 
     <string name="dialog_title">Clear category</string>
@@ -9,5 +10,20 @@
     <string name="dialog_positive_button">Accept</string>
     <string name="dialog_negative_button">Cancel</string>
     <string name="dialog_snaker">Category deleted correctly</string>
+
+    <string name="dialog_title_task">Delete task</string>
+    <string name="dialog_message_task">Are you sure you want to delete the task:</string>
+    <string name="dialog_positive_button_task">Accept</string>
+    <string name="dialog_negative_button_task">Cancel</string>
+    <string name="dialog_snaker_task">Task deleted correctly</string>
+
+    <string name="header_adapter_title_toDo">To do task</string>
+    <string name="header_adapter_title_Done">Completed tasks</string>
+
+    <string name="title_bar_task_create">Create task</string>
+    <string name="title_bar_task_edit">Edit task</string>
+
+    <string name="title_bar_category_create">Create Category</string>
+    <string name="title_bar_category_edit">Edit Category</string>
 
 </resources>

@@ -2,7 +2,6 @@ package com.example.todolist_android.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var categoryDAO: CategoryDAO
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,43 +41,29 @@ class MainActivity : AppCompatActivity() {
 
         adapter = CategoryAdapter(categoryList, { position ->
             // Click
-        }, { position ->
-            // Edit
             val category = categoryList[position]
-            val intent = Intent(this, CategoryActivity::class.java)
-            intent.putExtra(EXTRA_CATEGORY_ID, category.id)
+            val intent = Intent(this, TaskListActivity::class.java)
+            intent.putExtra("CATEGORY_ID", category.id)
             startActivity(intent)
         }, { position ->
+            // Edit
+            onEditItem(position)
+
+        }, { position ->
             // Delete
-            val category = categoryList[position]
-
-            val dialog = AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_title)
-                .setMessage(getString(R.string.dialog_message) + " ${category.name}?")
-                .setPositiveButton(R.string.dialog_positive_button) { dialog, which ->
-                    categoryDAO.delete(category.id)
-                    loadData()
-                    Snackbar.make(binding.root, R.string.dialog_snaker, Snackbar.LENGTH_SHORT).show()
-                    //Toast.makeText(this, "Categoría borrada correctamente", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton(R.string.dialog_negative_button, null)
-                .create()
-
-            dialog.show()
-
+            ondDeleteItem(position)
         })
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         binding.createButton.setOnClickListener {
             val intent = Intent(this, CategoryActivity::class.java)
             startActivity(intent)
         }
 
-
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -87,6 +73,31 @@ class MainActivity : AppCompatActivity() {
     fun loadData() {
         categoryList = categoryDAO.findAll()
         adapter.updateItems(categoryList)
+    }
+
+    private fun onEditItem(position: Int) {
+        val category = categoryList[position]
+        val intent = Intent(this, CategoryActivity::class.java)
+        intent.putExtra(EXTRA_CATEGORY_ID, category.id)
+        startActivity(intent)
+    }
+
+    private fun ondDeleteItem(position: Int) {
+        val category = categoryList[position]
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(R.string.dialog_title)
+            .setMessage(getString(R.string.dialog_message) + " ${category.name}?")
+            .setPositiveButton(R.string.dialog_positive_button) { dialog, which ->
+                categoryDAO.delete(category.id)
+                loadData()
+                Snackbar.make(binding.root, R.string.dialog_snaker, Snackbar.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Categoría borrada correctamente", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(R.string.dialog_negative_button, null)
+            .create()
+
+        dialog.show()
     }
 
 }

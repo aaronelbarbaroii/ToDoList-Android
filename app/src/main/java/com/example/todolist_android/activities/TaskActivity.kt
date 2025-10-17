@@ -7,24 +7,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.todolist_android.R
+import com.example.todolist_android.activities.CategoryActivity.Companion.EXTRA_CATEGORY_ID
 import com.example.todolist_android.data.Category
 import com.example.todolist_android.data.CategoryDAO
-import com.example.todolist_android.databinding.ActivityCategoryBinding
+import com.example.todolist_android.data.Task
+import com.example.todolist_android.data.TaskDAO
+import com.example.todolist_android.databinding.ActivityTaskBinding
 
-class CategoryActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_CATEGORY_ID = "CATEGORY_ID"
-    }
-    lateinit var binding: ActivityCategoryBinding
+class TaskActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityTaskBinding
+
+    lateinit var taskDAO: TaskDAO
     lateinit var categoryDAO: CategoryDAO
+
+    lateinit var task: Task
     lateinit var category: Category
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityCategoryBinding.inflate(layoutInflater)
+        binding = ActivityTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -32,39 +36,44 @@ class CategoryActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
 
-        val id = intent.getIntExtra("CATEGORY_ID", -1)
+        val categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, -1)
+        val id = intent.getIntExtra("TASK_ID", -1)
 
         categoryDAO = CategoryDAO(this)
+        taskDAO = TaskDAO(this)
+
+        category = categoryDAO.find(categoryId)!!
 
         if (id != -1) {
             // Edit
-            category = categoryDAO.find(id)!!
-            supportActionBar?.title = "Editar categoría"
+            task = taskDAO.find(id)!!
+            supportActionBar?.title = getString(R.string.title_bar_task_edit)
         } else {
             // Crear
-            category = Category(-1, "")
-            supportActionBar?.title = "Crear categoría"
+            task = Task(-1, "", false, category)
+            supportActionBar?.title = getString(R.string.title_bar_task_create)
         }
 
-        binding.nameEditText.editText?.setText(category.name)
+        binding.titleEditText.editText?.setText(task.title)
 
         binding.saveButton.setOnClickListener {
-            val name = binding.nameEditText.editText?.text.toString()
+            val title = binding.titleEditText.editText?.text.toString()
 
-            category.name = name
+            task.title = title
 
-            if (category.id == -1) {
-                categoryDAO.insert(category)
+            if (task.id == -1) {
+                taskDAO.insert(task)
             } else {
-                categoryDAO.update(category)
+                taskDAO.update(task)
             }
 
             finish()
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -76,6 +85,4 @@ class CategoryActivity : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
-
 }

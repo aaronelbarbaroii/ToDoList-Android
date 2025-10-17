@@ -3,6 +3,7 @@
     <string name="app_name">ToDoList-Android</string>
 
     <string name="hint_name">Nombre de Categoría</string>
+    <string name="hint_task">Que hay que hacer</string>
     <string name="button_save">Guardar</string>
 
     <string name="dialog_title">Borrar Categoría</string>
@@ -10,5 +11,20 @@
     <string name="dialog_positive_button">Aceptar</string>
     <string name="dialog_negative_button">Cancelar</string>
     <string name="dialog_snaker">Categoría borrada correctamente</string>
+
+    <string name="dialog_title_task">Borrar tarea</string>
+    <string name="dialog_message_task">¿Está usted seguro de que quiere borrar la tarea:</string>
+    <string name="dialog_positive_button_task">Aceptar</string>
+    <string name="dialog_negative_button_task">Cancelar</string>
+    <string name="dialog_snaker_task">Tarea borrada correctamente</string>
+
+    <string name="header_adapter_title_toDo">Tareas pendientes</string>
+    <string name="header_adapter_title_Done">Tareas completadas</string>
+
+    <string name="title_bar_task_create">Crear Tarea</string>
+    <string name="title_bar_task_edit">Editar Tarea</string>
+
+    <string name="title_bar_category_create">Crear Categoría</string>
+    <string name="title_bar_category_edit">Editar Categoría</string>
 
 </resources>

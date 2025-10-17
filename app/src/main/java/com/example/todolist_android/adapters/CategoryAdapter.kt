@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist_android.data.Category
 import com.example.todolist_android.databinding.ItemCategoryBinding
 
-class CategoryAdapter (
+class CategoryAdapter(
     var items: List<Category>,
     val onClickListener: (Int) -> Unit,
     val onEditListener: (Int) -> Unit,
@@ -49,9 +49,8 @@ class CategoryAdapter (
 
 }
 
-    class CategoryViewHolder(val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun render(category: Category) {
-            binding.nameTextView.text = category.name
-        }
+class CategoryViewHolder(val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun render(category: Category) {
+        binding.nameTextView.text = category.name
+    }
 }
